@@ -1,0 +1,1629 @@
+:root {
+    --primary-color: #4285f4;
+    --primary-dark: #3367d6;
+    --primary-light: #e8f0fe;
+    --secondary-color: #f8f9fa;
+    --text-color: #2d3436;
+    --light-text: #636e72;
+    --white: #ffffff;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+    --gradient: linear-gradient(135deg, #4285f4, #34a0ff);
+    --contact-purple: #6c5ce7;
+    --contact-pink: #e84393;
+    --contact-blue: #0984e3;
+    --contact-light-purple: #f1eeff;
+    --contact-light-pink: #ffe9f3;
+    --contact-light-blue: #e3f2fd;
+    /* Dark mode colors */
+    --dark-bg: #121212;
+    --dark-card: #1E1E1E;
+    --dark-text: #FFFFFF;
+    --dark-light-text: #AAAAAA;
+    --dark-border: #2A2A2A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+/* Dark mode support */
+body.dark-mode .nav-links a.active,
+body.dark-mode .nav-links a:hover {
+    color: var(--primary-color);
+}
+
+body.dark-mode .nav-links a.active::after,
+body.dark-mode .nav-links a:hover::after {
+    background: var(--primary-color);
+}
+
+/* Appointment Button Styles */
+.appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(66,133,244,0.2);
+}
+
+.appointment-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--primary-dark);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.appointment-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.appointment-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(66,133,244,0.4);
+}
+
+/* Navigation Appointment Button Styles */
+.navbar .appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(66,133,244,0.2);
+}
+
+.navbar .appointment-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66,133,244,0.3);
+}
+
+/* Dark Mode Navigation Button */
+body.dark-mode .navbar .appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(66,133,244,0.1);
+}
+
+body.dark-mode .navbar .appointment-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(66,133,244,0.2);
+}
+
+/* Hero Section Styles */
+.hero {
+    min-height: 100vh;
+    padding-top: 70px;
+    background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-slider-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    height: calc(100vh - 70px);
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2rem 5%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+    transform: translateX(100px);
+}
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-in-out 0.3s;
+}
+
+.hero-slide.active .hero-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-in-out 0.3s;
+}
+
+.hero-slide.active .hero-image {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Slider Controls - Light Mode */
+.hero .slider-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    z-index: 1000;
+}
+
+.hero .prev-btn,
+.hero .next-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--white);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1001;
+    padding: 0;
+}
+
+.hero .prev-btn i,
+.hero .next-btn i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.hero .prev-btn:hover,
+.hero .next-btn:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.3);
+}
+
+.hero .prev-btn:hover i,
+.hero .next-btn:hover i {
+    color: var(--white);
+}
+
+/* Slider Dots - Both Modes */
+.hero .slider-dots {
+    display: flex;
+    gap: 1rem;
+}
+
+.hero .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero .dot.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
+}
+
+/* Dark Mode Slider Controls */
+body.dark-mode .hero .prev-btn,
+body.dark-mode .hero .next-btn {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .hero .prev-btn i,
+body.dark-mode .hero .next-btn i {
+    color: var(--dark-text);
+}
+
+body.dark-mode .hero .prev-btn:hover,
+body.dark-mode .hero .next-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+}
+
+body.dark-mode .hero .prev-btn:hover i,
+body.dark-mode .hero .next-btn:hover i {
+    color: var(--white);
+}
+
+/* Dark Mode Styles */
+body.dark-mode .hero {
+    background: linear-gradient(135deg, rgba(66,133,244,0.1) 0%, var(--dark-bg) 100%);
+}
+
+body.dark-mode .hero-content h1 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .hero-content p {
+    color: var(--dark-light-text);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .hero-slide {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding: 0 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        margin-top: 2rem;
+    }
+
+    .hero-image img {
+        max-height: 50vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero .prev-btn,
+    .hero .next-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.why-choose-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(var(--primary-light) 2px, transparent 2px),
+        radial-gradient(var(--primary-light) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 2px;
+}
+
+.section-header span {
+    color: var(--primary-color);
+}
+
+.section-header p {
+    color: var(--light-text);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-card {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card .icon {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 5px 15px rgba(66,133,244,0.3);
+}
+
+.feature-card .icon i {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.feature-card h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.feature-card p {
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+/* Our Services Section */
+.our-services {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--secondary-color);
+}
+
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+/* Service Tags Hover Effects */
+.service-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 50px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.service-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.service-tag:hover::before {
+    left: 0;
+}
+
+.service-tag i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.service-tag span {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.service-tag:hover {
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+}
+
+.service-tag:hover i,
+.service-tag:hover span {
+    color: var(--white);
+}
+
+/* Dark Mode Service Tags */
+body.dark-mode .service-tag {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .service-tag span {
+    color: var(--dark-text);
+}
+
+body.dark-mode .service-tag:hover {
+    border-color: transparent;
+}
+
+/* Service Feature */
+.service-feature {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 4rem;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.service-image {
+    flex: 1;
+    height: 400px;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.service-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.service-content span {
+    color: var(--primary-color);
+}
+
+.service-content p {
+    color: var(--light-text);
+    margin-bottom: 2rem;
+}
+
+/* Service Feature Section */
+.service-feature .appointment-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.service-feature .appointment-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--primary-dark);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.service-feature .appointment-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.service-feature .appointment-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(66,133,244,0.4);
+}
+
+/* Dark Mode Service Feature */
+body.dark-mode .service-feature .appointment-btn:hover {
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+}
+
+/* Doctors Section */
+.doctors {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.doctors::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(var(--primary-light) 2px, transparent 2px),
+        radial-gradient(var(--primary-light) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.doctors-slider {
+    position: relative;
+    margin-top: 3rem;
+    overflow: hidden;
+}
+
+.doctors-container {
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.doctor-card {
+    min-width: calc(33.333% - 1.334rem);
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.doctor-card:hover {
+    transform: translateY(-10px);
+}
+
+.doctor-image {
+    height: 300px;
+    overflow: hidden;
+}
+
+.doctor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.doctor-card:hover .doctor-image img {
+    transform: scale(1.1);
+}
+
+.doctor-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.doctor-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-info p {
+    color: var(--light-text);
+    margin-bottom: 1rem;
+}
+
+/* Profile Button Styles */
+.profile-btn {
+    background: transparent;
+    color: var(--primary-color);
+    padding: 0.5rem 1.2rem;
+    border: 1.5px solid currentColor;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    letter-spacing: 0.3px;
+}
+
+.profile-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.profile-btn:hover {
+    color: var(--white);
+}
+
+.profile-btn:hover::before {
+    width: 100%;
+}
+
+/* Dark Mode Profile Button */
+body.dark-mode .profile-btn {
+    color: var(--primary-color);
+    border-color: currentColor;
+}
+
+body.dark-mode .profile-btn:hover {
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--secondary-color);
+}
+
+.testimonials-slider {
+    position: relative;
+    margin-top: 3rem;
+    overflow: hidden;
+}
+
+.testimonials-container {
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card {
+    min-width: calc(33.333% - 1.334rem);
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.user-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-details h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.rating {
+    color: #ffc107;
+}
+
+.rating i {
+    font-size: 0.9rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.review-text {
+    color: var(--light-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #f8f9ff;
+}
+
+.contact .section-header {
+    margin-bottom: 4rem;
+}
+
+.contact .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    -webkit-text-fill-color: initial;
+}
+
+.contact .section-header h2 span {
+    background: linear-gradient(45deg, #2196f3, #9c27b0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.contact .section-header p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.contact-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 350px;
+}
+
+/* Unique colors for each card */
+.contact-card:nth-child(1) {
+    background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+}
+
+.contact-card:nth-child(2) {
+    background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%);
+}
+
+.contact-card:nth-child(3) {
+    background: linear-gradient(135deg, #ffffff 0%, #f3e5f5 100%);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact-card:nth-child(1) .contact-icon {
+    background: #2196f3;
+    box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+}
+
+.contact-card:nth-child(2) .contact-icon {
+    background: #ff9800;
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
+}
+
+.contact-card:nth-child(3) .contact-icon {
+    background: #9c27b0;
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.3);
+}
+
+.contact-icon i {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.contact-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.contact-card p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.contact-btn-wrapper {
+    padding-top: 2rem;
+    margin-top: auto;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    min-width: 180px;
+}
+
+/* WhatsApp Button */
+.contact-card:nth-child(1) .contact-btn {
+    color: #2196f3;
+    background: rgba(33, 150, 243, 0.1);
+    border: none;
+}
+
+.contact-card:nth-child(1) .contact-btn:hover {
+    background: #2196f3;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+}
+
+/* Chat Button */
+.contact-card:nth-child(2) .contact-btn {
+    color: #ff9800;
+    background: rgba(255, 152, 0, 0.1);
+    border: none;
+}
+
+.contact-card:nth-child(2) .contact-btn:hover {
+    background: #ff9800;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+}
+
+/* Email Button */
+.contact-card:nth-child(3) .contact-btn {
+    color: #9c27b0;
+    background: rgba(156, 39, 176, 0.1);
+    border: none;
+}
+
+.contact-card:nth-child(3) .contact-btn:hover {
+    background: #9c27b0;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+}
+
+/* Dark Mode Contact Buttons */
+body.dark-mode .contact-card:nth-child(1) .contact-btn:hover {
+    background: #2196f3;
+    color: white;
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+}
+
+body.dark-mode .contact-card:nth-child(2) .contact-btn:hover {
+    background: #ff9800;
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.2);
+}
+
+body.dark-mode .contact-card:nth-child(3) .contact-btn:hover {
+    background: #9c27b0;
+    color: white;
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.2);
+}
+
+/* Hover states */
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+.contact-card:hover .contact-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Add a subtle pattern to cards */
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 10px 10px, rgba(0,0,0,0.03) 1px, transparent 0);
+    background-size: 20px 20px;
+    opacity: 0.5;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(145deg, #2d3436, #2d3436);
+    color: var(--white);
+    padding: 5rem 5% 1rem;
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('assets/images/pattern.png');
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.footer-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-info {
+    max-width: 300px;
+}
+
+.footer-logo a {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.footer-logo span {
+    color: var(--primary-color);
+}
+
+.footer-logo p {
+    margin: 1.5rem 0;
+    color: #999;
+    line-height: 1.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--gradient);
+    transform: translateY(-3px) rotate(360deg);
+    transition: all 0.5s ease;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    color: var(--white);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-links h3::after,
+.footer-contact h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 1rem;
+}
+
+.footer-links ul li a {
+    color: #999;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links ul li a:hover {
+    color: var(--white);
+    transform: translateX(5px);
+}
+
+.footer-contact p {
+    color: #999;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-contact p i {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Add animation classes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header,
+.feature-card,
+.service-tag,
+.doctor-card,
+.testimonial-card,
+.contact-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    cursor: pointer;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Header Dark Mode */
+body.dark-mode .header {
+    background: var(--dark-card);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .nav-links a {
+    color: var(--dark-text);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a.active {
+    color: var(--primary-color);
+}
+
+body.dark-mode .logo a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .theme-toggle i {
+    color: var(--dark-text);
+}
+
+/* Sections Dark Mode */
+body.dark-mode .section-header h2 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .section-header p {
+    color: var(--dark-light-text);
+}
+
+/* Feature Cards Dark Mode */
+body.dark-mode .feature-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .feature-card .icon {
+    background: var(--gradient);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.15);
+}
+
+body.dark-mode .feature-card h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .feature-card p {
+    color: var(--dark-light-text);
+}
+
+/* Services Dark Mode */
+body.dark-mode .our-services {
+    background: var(--dark-bg);
+}
+
+body.dark-mode .service-tag {
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+body.dark-mode .service-tag i {
+    color: var(--primary-color);
+}
+
+body.dark-mode .service-feature {
+    background: var(--dark-card);
+}
+
+body.dark-mode .service-content h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .service-content p {
+    color: var(--dark-light-text);
+}
+
+/* Doctors Section Dark Mode */
+body.dark-mode .doctors {
+    background: var(--dark-bg);
+}
+
+body.dark-mode .doctor-card {
+    background: var(--dark-card);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .doctor-info h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .doctor-info p {
+    color: var(--dark-light-text);
+}
+
+/* Testimonials Dark Mode */
+body.dark-mode .testimonials {
+    background: var(--dark-bg);
+}
+
+body.dark-mode .testimonial-card {
+    background: var(--dark-card);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .user-details h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .review-text {
+    color: var(--dark-light-text);
+}
+
+/* Contact Section Dark Mode */
+body.dark-mode .contact {
+    background: var(--dark-bg);
+}
+
+body.dark-mode .contact-card {
+    background: var(--dark-card);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .contact-card h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .contact-card p {
+    color: var(--dark-light-text);
+}
+
+/* Slider Controls Dark Mode */
+body.dark-mode .prev-btn,
+body.dark-mode .next-btn {
+    background: var(--dark-card);
+    color: var(--dark-text);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .prev-btn:hover,
+body.dark-mode .next-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .dot {
+    background: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .dot.active {
+    background: var(--primary-color);
+}
+
+/* Footer Dark Mode */
+body.dark-mode .footer {
+    background: var(--dark-bg);
+    border-top: 1px solid var(--dark-border);
+}
+
+body.dark-mode .footer-logo a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .footer-logo p,
+body.dark-mode .footer-links ul li a,
+body.dark-mode .footer-contact p {
+    color: var(--dark-light-text);
+}
+
+body.dark-mode .social-links a {
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+body.dark-mode .footer-bottom {
+    border-top-color: var(--dark-border);
+    color: var(--dark-light-text);
+}
+
+/* Update dark mode colors */
+:root {
+    /* ... existing variables ... */
+    --dark-bg: #121212;
+    --dark-card: #1E1E1E;
+    --dark-text: #FFFFFF;
+    --dark-light-text: #AAAAAA;
+    --dark-border: #2A2A2A;
+}
+
+/* Update Why Choose Us Dark Mode styles */
+body.dark-mode .why-choose-us {
+    background: var(--dark-bg);
+}
+
+body.dark-mode .why-choose-us::before {
+    opacity: 0.05;
+}
+
+body.dark-mode .feature-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .feature-card .icon {
+    background: var(--gradient);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.15);
+}
+
+body.dark-mode .feature-card h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .feature-card p {
+    color: var(--dark-light-text);
+}
+
+/* Update section header for dark mode */
+body.dark-mode .section-header h2 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .section-header h2::after {
+    background: var(--gradient);
+    opacity: 0.8;
+}
+
+body.dark-mode .section-header span {
+    color: var(--primary-color);
+}
+
+body.dark-mode .section-header p {
+    color: var(--dark-light-text);
+}
+
+/* Update button styles for both light and dark modes */
+.appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.appointment-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.3);
+}
+
+/* Dark mode button styles */
+body.dark-mode .appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+body.dark-mode .appointment-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+}
+
+/* Slider control buttons dark mode */
+body.dark-mode .prev-btn,
+body.dark-mode .next-btn {
+    background: var(--dark-card);
+    color: var(--dark-text);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .prev-btn:hover,
+body.dark-mode .next-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+    border-color: var(--primary-color);
+}
+
+/* Contact buttons dark mode */
+body.dark-mode .contact-btn {
+    background: var(--dark-card);
+    color: var(--dark-text);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .contact-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.2);
+    border-color: var(--primary-color);
+}
+
+/* Navigation Button Dark Mode Styles */
+body.dark-mode .navbar .appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+}
+
+body.dark-mode .navbar .appointment-btn:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.3);
+}
+
+/* Update existing navbar button styles */
+.navbar .appointment-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar .appointment-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(66,133,244,0.3);
+} 
